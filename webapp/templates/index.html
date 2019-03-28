@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    <h3>What would you like to do ?</h3>
+    <p>Browse some content on Java? Then access Stackoverflow right from your profile page!</p>
+    <p>View your browsing activity? Click on the Viz links above to see the graphs.</p>
+{#    {% for post in posts %}#}
+{#    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>#}
+{#    {% endfor %}#}
+{% endblock %}

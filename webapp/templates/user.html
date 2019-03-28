@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table>
+        <tr valign="top">
+            <td><img src="{{ user.avatar(128) }}"></td>
+            <td></td>
+            <td>
+                <h1>{{ user.username }}</h1>
+                {% if user.last_seen %}<p>Last login: {{ user.last_seen }} UTC</p>{% endif %}
+                <p>Go to Stackoverflow : <a href="https://stackoverflow.com/questions/tagged/java?sort=frequent&pageSize=15">Java</a></p>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    {% if user.username == "aaa" %}
+        <h3>Analysis & Findings</h3>
+        <p>1. This user is mostly active on Sunday, Monday and Saturday</p>
+        <p>2. The number of posts, comments and upvotes he makes are larger in number on weekends.</p>
+        <p>3. In the middle of the week, the user is mostly inactive, with a very few posts/comments made.</p>
+        <br>
+        <h3>Explanation</h3>
+        <p>This user's activity is mostly centered around weekend time. This indicates, that he/she might be a working person who gets time on weekends to make use of this portal for his own studies or research. It looks like he gets some time on Monday's since his counts are high. This may indicate that his work load is less on Monday's to give him some time to do research</p>
+    {% elif user.username == "bbb" %}
+        <h3>Analysis & Findings</h3>
+        <p>1. This user is throughout the week</p>
+        <p>2. The number of posts, comments and upvotes he makes are high on all days Mon-Fri</p>
+        <p>3. He is mostly inactive of Saturdays and Sundays</p>
+        <br>
+        <h3>Explanation</h3>
+        <p>This user's activity is spread across the week and is significantly high. This user seems to make heavy use of Stackoverflow for his research even during week. Maybe he works from home or his work load involves that much extensive use of Stackoverflow on a daily basis</p>
+    {% elif user.username == "ccc" %}
+        <h3>Analysis & Findings</h3>
+        <p>1. This user's activity is spread throught the week</p>
+        <p>2. His posts, comments etc are less in number but is there everyday</p>
+        <p>3. He uses Stackoverflow sparingly</p>
+        <br>
+        <h3>Explanation</h3>
+        <p>This user maybe a new person using Stackoverflow. He/she could be a student who has just begun to use Stackoverflow and browse everything that is there on the portal</p>
+    {% endif %}
+{#    {% for post in posts %}#}
+{#        {% include '_post.html' %}#}
+{#    {% endfor %}#}
+{% endblock %}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Visualizations</title>
+
+    <!-- import plugin script -->
+    <script src='static/Chart.min.js'></script>
+
+</head>
+<body>
+
+<div>
+    {% if current_user.is_anonymous %}
+        <h2>Social Visualization with Behavior Logging</h2>
+        {#        <a href="{{ url_for('login') }}">Login</a>#}
+    {% else %}
+        <h2>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+            <a href="{{ url_for('chart1') }}">Viz1</a>
+            <a href="{{ url_for('chart2') }}">Viz2</a>
+            <a href="{{ url_for('chart3') }}">Viz3</a>
+            <a href="{{ url_for('logout') }}">Logout</a></h2>
+    {% endif %}
+</div>
+<hr>
+
+<h1>How many posts did the user upvote</h1>
+<!-- bar chart canvas element -->
+<canvas id="chart" width="600" height="400"></canvas>
+
+<script>
+
+    // bar chart data
+    var barData = {
+        labels : [{% for item in labels %}
+            "{{item}}",
+        {% endfor %}],
+        datasets : [
+            {
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                bezierCurve : false,
+                data : [{% for item in values %}
+                    {{item}},
+                {% endfor %}]
+            }]
+    }
+
+    Chart.defaults.global.animationSteps = 50;
+    Chart.defaults.global.tooltipYPadding = 16;
+    Chart.defaults.global.tooltipCornerRadius = 0;
+    Chart.defaults.global.tooltipTitleFontStyle = "normal";
+    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+    Chart.defaults.global.animationEasing = "easeOutBounce";
+    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.scaleLineColor = "black";
+    Chart.defaults.global.scaleFontSize = 16;
+
+    // get bar chart canvas
+    var mychart = document.getElementById("chart").getContext("2d");
+
+    steps = 10
+    max = 10
+    // draw bar chart
+    var LineChartDemo = new Chart(mychart).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+
+    });
+
+
+</script>
+</body>
+</html>

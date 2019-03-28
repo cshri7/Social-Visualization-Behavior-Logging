@@ -1,0 +1,17 @@
+{
+    "name": "SO-Java",
+    "manifest_version": 2,
+    "version": "1.0",
+    "description": "Extension to log activities on stackoverflow web page, tag=java",
+    "permissions": [
+        "tabs", "activeTab", "https://stackoverflow.com/questions/tagged/java*"
+    ],
+    "content_scripts": [{
+        "js": ["jquery-3.3.1.min.js", "contentscript.js"],
+        "matches": ["https://*/*","https://stackoverflow.com/questions/tagged/java*"]
+    }],
+    "background": {
+        "scripts": ["jquery-3.3.1.min.js", "background.js"],
+        "persistent": false
+    }
+}
